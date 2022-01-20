@@ -16,6 +16,34 @@ public class InfomacoesDosPrev {
 	private String dibInicial;
 	private String dibFinal;
 	private String rmi;
+	private String beneficio;
+	private String nb;
+	private String aps;
+	private String dip;
+	public String getBeneficio() {
+		return beneficio;
+	}
+	public void setBeneficio(String beneficio) {
+		this.beneficio = beneficio;
+	}
+	public String getNb() {
+		return nb;
+	}
+	public void setNb(String nb) {
+		this.nb = nb;
+	}
+	public String getAps() {
+		return aps;
+	}
+	public void setAps(String aps) {
+		this.aps = aps;
+	}
+	public String getDip() {
+		return dip;
+	}
+	public void setDip(String dip) {
+		this.dip = dip;
+	}
 	public String getNumeroDoProcesso() {
 		return numeroDoProcesso;
 	}
