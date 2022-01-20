@@ -20,6 +20,7 @@ public class InfomacoesDosPrev {
 	private String nb;
 	private String aps;
 	private String dip;
+	
 	public String getBeneficio() {
 		return beneficio;
 	}

@@ -83,7 +83,8 @@ public class funcionar {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+    	Ativo ativo = new Ativo();
+    	ativo.setAtivo(false);
 		InfomacoesDosPrev[] lista = new InfomacoesDosPrev[100];
 		int x = 0;
 		boolean validacao;
@@ -92,12 +93,19 @@ public class funcionar {
 			while("Sem registros para exibir" != repository.entrarNoProcessoAutomatico()) {
 				validacao = repository.dataDeValidacaoDosPrev();
 				if ( validacao == true) {
-					lista[x] = repository.procurarDosPrev();
-					repository.etiquetar(validacao, letra, 0);
-					x++;
+					ativo = repository.verificacaoDeAtivo();
+					if(ativo.getAtivo() == true) {
+						lista[x] = repository.procurarDosPrev();
+						repository.etiquetar(validacao, letra, 0);
+						x++;
+					}
+					else {
+						repository.etiquetar(ativo.getAtivo(), ativo.getBeneficio(), 1);
+					}
 				}
 				else {
-					repository.etiquetar(validacao, letra, 0);
+					repository.etiquetar(ativo.getAtivo(), ativo.getBeneficio(), 0);
+					
 				}
 			}
 			
