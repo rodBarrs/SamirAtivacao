@@ -95,7 +95,7 @@ public class funcionar {
 				if ( validacao == true) {
 					ativo = repository.verificacaoDeAtivo();
 					if(ativo.getAtivo() == true) {
-						lista[x] = repository.procurarDosPrev();
+						 repository.procurarDosPrev();
 						repository.etiquetar(validacao, letra, 0);
 						x++;
 					}
@@ -110,10 +110,8 @@ public class funcionar {
 			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("entrei no cath");
 		}
-		System.out.println("Lista: " + lista);
-		repository.teste(lista);
 		 return lista;
 		
 		

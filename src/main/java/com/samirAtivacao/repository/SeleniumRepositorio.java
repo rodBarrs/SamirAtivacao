@@ -28,7 +28,7 @@ import com.samirAtivacao.modelo.LoginModelo;
  * @author AGU
  */
 public class SeleniumRepositorio {
-    WebDriver driver;
+	WebDriver driver;
 	WebDriverWait wait;
 
 	public String open(LoginModelo usuario) {
@@ -198,7 +198,7 @@ public class SeleniumRepositorio {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[" + i + "]/td[2]/div/span")));
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[" + i + "]/td[2]/div/span")));
 			Thread.sleep(500);
-			
+
 			Boolean existeDosPrev = driver.findElement(By.xpath("//tr[" + i + "]/td[2]/div/span")).getText()
 					.toUpperCase().contains("DOSSIÊ PREVIDENCIÁRIO");
 			if (existeDosPrev == true) {
@@ -244,7 +244,7 @@ public class SeleniumRepositorio {
 						int x = 0;
 						x = dataATUALocalDateTime.getDayOfYear() - dataValidacao.getDayOfYear();
 						if (x <= 30) {
-							System.out.println("x é menor ou igual a 30" + x);
+							System.out.println("x é menor ou igual a 30  x = " + x);
 							return true;
 						} else {
 
@@ -257,7 +257,7 @@ public class SeleniumRepositorio {
 							if (dataValidacao.getMonthValue() == 12) {
 
 								int x = dataValidacao.getDayOfYear() - 333;
-								if (x <= dataATUALocalDateTime.getDayOfYear()) {
+								if (dataATUALocalDateTime.getDayOfYear()<= x ) {
 									System.out.println("x é menor ou igual a 30" + x);
 									return true;
 								} else {
@@ -308,7 +308,8 @@ public class SeleniumRepositorio {
 				try {
 					String cnj = driver.findElement(By.xpath("/html/body/div/div[1]/table/tbody/tr[1]/td")).getText();
 					System.out.println("CNJ: " + cnj);
-					String dataAjuizamento = driver.findElement(By.xpath("/html/body/div/div[1]/table/tbody/tr[2]/td")).getText();
+					String dataAjuizamento = driver.findElement(By.xpath("/html/body/div/div[1]/table/tbody/tr[2]/td"))
+							.getText();
 					System.out.println("Data de Ajuizamento: " + dataAjuizamento + "funcinou");
 					String dataValiadcaoString = driver.findElement(By.xpath("/html/body/div/p[2]/b")).getText();
 					System.out.println(dataValiadcaoString);
@@ -329,13 +330,16 @@ public class SeleniumRepositorio {
 					String aps;
 					for (int j = 2; j < 100; j++) {
 						try {
-							verificarAtivo = driver.findElement(By.xpath("/html/body/div/div[3]/table/tbody/tr[" + j + "]/td[6]"))
+							verificarAtivo = driver
+									.findElement(By.xpath("/html/body/div/div[3]/table/tbody/tr[" + j + "]/td[6]"))
 									.getText().toUpperCase().contains("ATIVO");
 							if (verificarAtivo) {
-								beneficio = driver.findElement(By.xpath("/html/body/div/div[3]/table/tbody/tr[" + j + "]/td[2]"))
+								beneficio = driver
+										.findElement(By.xpath("/html/body/div/div[3]/table/tbody/tr[" + j + "]/td[2]"))
 										.getText();
 								System.out.println(beneficio);
-								nb =  driver.findElement(By.xpath("/html/body/div/div[3]/table/tbody/tr[" + j + "]/td[1]"))
+								nb = driver
+										.findElement(By.xpath("/html/body/div/div[3]/table/tbody/tr[" + j + "]/td[1]"))
 										.getText();
 								informacao.setBeneficio(beneficio);
 								informacao.setNb(nb);
@@ -344,30 +348,42 @@ public class SeleniumRepositorio {
 						} catch (Exception e) {
 							System.out.println("Entrei no Catch");
 							break;
-							
+
 						}
 					}
 					System.out.println("Nb: " + nb);
-					
+
 					for (int j = 2; j < 100; j++) {
 						try {
 							System.out.println(nb);
-							verificarAtivo = driver.findElement(By.xpath("/html/body/div/div[6]/div[" + j + "]/table[1]/tbody/tr[2]/td[2]"))
+							verificarAtivo = driver
+									.findElement(
+											By.xpath("/html/body/div/div[6]/div[" + j + "]/table[1]/tbody/tr[2]/td[2]"))
 									.getText().toUpperCase().contains(nb);
 							if (verificarAtivo) {
-								dibInicial = driver.findElement(By.xpath("/html/body/div/div[6]/div[" + j + "]/table[1]/tbody/tr[2]/td[6]"))
+								dibInicial = driver
+										.findElement(By.xpath(
+												"/html/body/div/div[6]/div[" + j + "]/table[1]/tbody/tr[2]/td[6]"))
 										.getText();
-								System.out.println(dibInicial );
-								dip=  driver.findElement(By.xpath("/html/body/div/div[6]/div[" + j + "]/table[1]/tbody/tr[2]/td[8]"))
+								System.out.println(dibInicial);
+								dip = driver
+										.findElement(By.xpath(
+												"/html/body/div/div[6]/div[" + j + "]/table[1]/tbody/tr[2]/td[8]"))
 										.getText();
 								System.out.println("DIP: " + dip);
-								dibFinal = driver.findElement(By.xpath("/html/body/div/div[6]/div[" + j + "]/table[1]/tbody/tr[2]/td[7]"))
-										.getText(); 
+								dibFinal = driver
+										.findElement(By.xpath(
+												"/html/body/div/div[6]/div[" + j + "]/table[1]/tbody/tr[2]/td[7]"))
+										.getText();
 								System.out.println("DIP FINAL: " + dibFinal);
-								rmi=  driver.findElement(By.xpath("/html/body/div/div[6]/div[" + j + "]/table[2]/tbody/tr[2]/td[1]"))
+								rmi = driver
+										.findElement(By.xpath(
+												"/html/body/div/div[6]/div[" + j + "]/table[2]/tbody/tr[2]/td[1]"))
 										.getText();
 								System.out.println("RMI: " + rmi);
-								aps=  driver.findElement(By.xpath("/html/body/div/div[6]/div[" + j + "]/table[3]/tbody/tr[2]/td[8]"))
+								aps = driver
+										.findElement(By.xpath(
+												"/html/body/div/div[6]/div[" + j + "]/table[3]/tbody/tr[2]/td[8]"))
 										.getText();
 								System.out.println("APS: " + aps);
 								j = 100;
@@ -381,16 +397,17 @@ public class SeleniumRepositorio {
 						} catch (Exception e) {
 							System.out.println("Entrei no Catch");
 							return informacao;
-							
-							
+
 						}
-					
-					/*dataValiadcaoString = dataValiadcaoString
-							.replace("* Informações extraídas dos sistemas informatizados do INSS em: ", "");
-					System.out.println(dataValiadcaoString);*/
-	
+
+						/*
+						 * dataValiadcaoString = dataValiadcaoString
+						 * .replace("* Informações extraídas dos sistemas informatizados do INSS em: ",
+						 * ""); System.out.println(dataValiadcaoString);
+						 */
+
 					}
-				}catch (Exception e) {
+				} catch (Exception e) {
 					System.out.println("Vish entrei no tal do catch 2");
 					// dataAjuizamento =
 					// driver.findElement(By.xpath("/html/body/div/div[5]/table/tbody/tr[3]/td[2]")).getText();
@@ -406,27 +423,25 @@ public class SeleniumRepositorio {
 
 	public void etiquetar(Boolean validacao, String beneficio, int seletar) {
 		List<String> janela = new ArrayList<String>(driver.getWindowHandles());
-		this.driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS).pageLoadTimeout(0, TimeUnit.SECONDS);
+		this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS).pageLoadTimeout(1, TimeUnit.SECONDS);
 		driver.switchTo().window(janela.get(1));
 
 		String campoPassPath = "/html/body/div[3]/div[1]/div/div/table[1]/tbody/tr/td[2]/input";
 		WebElement campoPassElemt = driver.findElement(By.xpath(campoPassPath));
 		campoPassElemt.click();
-		if (seletar == 1){
+		if (seletar == 1) {
 			if (validacao == true) {
 				campoPassElemt.sendKeys("ATIVO " + beneficio);
 			} else {
 				campoPassElemt.sendKeys("INDEFERIDO OU CESSADO");
 			}
-		}
-		else if(seletar ==0){
+		} else if (seletar == 0) {
 			if (validacao == true) {
 				campoPassElemt.sendKeys("LIDO BOOT");
 			} else {
 				campoPassElemt.sendKeys("DOSPREV VENCIDO");
 			}
 		}
-		
 
 		WebElement salvarEtiqueta = driver
 				.findElement(By.xpath("/html/body/div[3]/div[1]/div/div/a/span/span/span[2]"));
@@ -440,7 +455,7 @@ public class SeleniumRepositorio {
 	}
 
 	public Ativo verificacaoDeAtivo() {
-		this.driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS).pageLoadTimeout(0, TimeUnit.SECONDS);
+		this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS).pageLoadTimeout(1, TimeUnit.SECONDS);
 		List<String> janela = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(janela.get(1));
 		Ativo ativo = new Ativo();
@@ -460,7 +475,7 @@ public class SeleniumRepositorio {
 			} catch (Exception e) {
 				System.out.println("Entrei no Catch");
 				break;
-				
+
 			}
 		}
 		ativo.setAtivo(verificarAtivo);
@@ -471,9 +486,11 @@ public class SeleniumRepositorio {
 	public void quit() {
 		driver.quit();
 	}
-        public void teste(InfomacoesDosPrev[] lista){
-        	String listaString = Arrays.toString(lista);
-            driver.get("https://www.google.com.br/");
-            driver.findElement(By.xpath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input")).sendKeys(listaString);
-        }
+
+	public void teste(InfomacoesDosPrev[] lista) {
+		String listaString = Arrays.toString(lista);
+		driver.get("https://www.google.com.br/");
+		driver.findElement(By.xpath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input"))
+				.sendKeys(listaString);
+	}
 }
