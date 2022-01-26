@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,8 @@ import com.samirAtivacao.repository.UsuarioRepository;
 
 @Service
 public class BancoController {
+	
+	@Autowired
 	private UsuarioRepository repository = new UsuarioRepository() {
 		
 		@Override
@@ -25,7 +28,8 @@ public class BancoController {
 		}
 		
 		@Override
-		public <S extends UsuarioModelo, R> R findBy(Example<S> example, Function<FetchableFluentQuery<S>, R> queryFunction) {
+		public <S extends UsuarioModelo, R> R findBy(Example<S> example,
+				Function<FetchableFluentQuery<S>, R> queryFunction) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -192,6 +196,7 @@ public class BancoController {
 			
 		}
 	};
+	
 	 public String teste(UsuarioModelo vinda) {
 		 repository.save(vinda);
 		Long id = (long) 1;
