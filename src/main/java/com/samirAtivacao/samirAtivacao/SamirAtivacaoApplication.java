@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.samirAtivacao.controller.funcionar;
 import com.samirAtivacao.modelo.LoginModelo;
+import com.samirAtivacao.modelo.Usuario;
 import com.samirAtivacao.view.loginTeste;
 
 
@@ -115,9 +116,10 @@ public class SamirAtivacaoApplication extends javax.swing.JFrame {
 
     @SuppressWarnings("deprecation")
 	private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        LoginModelo login = new LoginModelo();
-        login.setPass(jPasswordField1.getText());
-        login.setUser(jTextField1.getText());
+        Usuario login = new Usuario();
+        login.setSenha(jPasswordField1.getText());
+        login.setCpf(jTextField1.getText());
+        
         funcionar shazam = new funcionar();
         JOptionPane.showMessageDialog(null,  shazam.testeDeAtivacao(login));
     }//GEN-LAST:event_jToggleButton1ActionPerformed

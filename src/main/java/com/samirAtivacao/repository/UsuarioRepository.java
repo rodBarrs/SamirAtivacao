@@ -3,10 +3,10 @@ package com.samirAtivacao.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.samirAtivacao.modelo.UsuarioModelo;
+import com.samirAtivacao.modelo.Usuario;
 
 
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<UsuarioModelo, Long> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 }

@@ -9,6 +9,7 @@ package com.samirAtivacao.modelo;
  * @author AGU
  */
 public class InfomacoesDosPrev {
+	private int id;
     private String numeroDoProcesso;
 	private String nome;
 	private String dataAjuizamento;
@@ -95,5 +96,11 @@ public class InfomacoesDosPrev {
 		nome =inf.getNome();
 		numeroDoProcesso = inf.getNumeroDoProcesso();
 		dataAjuizamento = inf.getDataAjuizamento();
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 }

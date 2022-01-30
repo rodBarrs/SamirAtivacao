@@ -22,6 +22,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.samirAtivacao.modelo.Ativo;
 import com.samirAtivacao.modelo.InfomacoesDosPrev;
 import com.samirAtivacao.modelo.LoginModelo;
+import com.samirAtivacao.modelo.Usuario;
 
 /**
  *
@@ -31,7 +32,7 @@ public class SeleniumRepositorio {
 	WebDriver driver;
 	WebDriverWait wait;
 
-	public String open(LoginModelo usuario) {
+	public String open(Usuario usuario) {
 		String url = "https://sapiens.agu.gov.br/login";
 		System.setProperty("webdriver.gecko.driver", "GeckoDriver.exe");
 		driver = new FirefoxDriver();
@@ -40,12 +41,12 @@ public class SeleniumRepositorio {
 		String campoUserPath = "/html/body/div[1]/div[1]/div/div/div[2]/div/div/div/table[1]/tbody/tr/td[2]/input";
 		WebElement campoUserElemt = driver.findElement(By.xpath(campoUserPath));
 		// String user = "039.669.222-23";
-		campoUserElemt.sendKeys(usuario.getUser());
+		campoUserElemt.sendKeys(usuario.getCpf());
 
 		String campoPassPath = "/html/body/div[1]/div[1]/div/div/div[2]/div/div/div/table[2]/tbody/tr/td[2]/input";
 		WebElement campoPassElemt = driver.findElement(By.xpath(campoPassPath));
 		// String pass = "AfonsoSoVacuo1";
-		campoPassElemt.sendKeys(usuario.getPass());
+		campoPassElemt.sendKeys(usuario.getSenha());
 
 		String sendLoginPath = "button-1019-btnIconEl";
 		WebElement sendLoginElem = driver.findElement(By.id(sendLoginPath));
@@ -83,7 +84,7 @@ public class SeleniumRepositorio {
 
 	}
 
-	public String colocarFiltro() throws InterruptedException {
+	public String colocarFiltro( String etiqueta) throws InterruptedException {
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
 		WebElement setaAparecer = driver.findElement(
 				By.xpath("/html/body/div[4]/div[1]/div[2]/div/div[2]/div[1]/div[3]/div/div/div[33]/div/span"));
@@ -99,7 +100,8 @@ public class SeleniumRepositorio {
 		WebElement filtroSpace = driver
 				.findElement(By.xpath("/html/body/div[13]/div/div[2]/div/table/tbody/tr/td[2]/input"));
 		filtroSpace.click();
-		filtroSpace.sendKeys("SAMIR");
+		System.out.println("etiqueta no filtro: " + etiqueta);
+		filtroSpace.sendKeys(etiqueta);
 		Thread.sleep(1000);
 		long time = 100;
 		wait = new WebDriverWait(driver, time);
@@ -113,7 +115,7 @@ public class SeleniumRepositorio {
 
 	}
 
-	public String entrarNoProcessoAutomatico() throws InterruptedException {
+	public String entrarNoProcessoAutomatico(String etiqueta) throws InterruptedException {
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
 		Thread.sleep(1000);
 		String verificacao = driver
@@ -138,7 +140,7 @@ public class SeleniumRepositorio {
 			boolean confirmacaoDeAtivacao = driver
 					.findElement(By.xpath(
 							"/html/body/div[4]/div[1]/div[2]/div/div[2]/div[1]/div[4]/div/table/tbody/tr[1]/td[9]/div"))
-					.getText().toUpperCase().contains("SAMIR");
+					.getText().toUpperCase().contains(etiqueta);
 			if (confirmacaoDeAtivacao == false) {
 				return "Codigo das eiquetas estao errados";
 			} else {

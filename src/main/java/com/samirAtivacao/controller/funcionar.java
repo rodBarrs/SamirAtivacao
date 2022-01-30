@@ -4,9 +4,11 @@
  */
 package com.samirAtivacao.controller;
 
+import com.samirAtivacao.DAO.DAOInformacoesDosPrev;
 import com.samirAtivacao.modelo.Ativo;
 import com.samirAtivacao.modelo.InfomacoesDosPrev;
 import com.samirAtivacao.modelo.LoginModelo;
+import com.samirAtivacao.modelo.Usuario;
 import com.samirAtivacao.repository.SeleniumRepositorio;
 
 /**
@@ -16,7 +18,7 @@ import com.samirAtivacao.repository.SeleniumRepositorio;
 public class funcionar {
     private SeleniumRepositorio repository = new SeleniumRepositorio();
     
-    public String testeDeAtivacao( LoginModelo login) {
+    public String testeDeAtivacao( Usuario usuario) {
 			/*try {
 	            //URL do som que no caso esta no pendrive, mais ainda é uma fase de teste.
 	            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("espartanos.wav").getAbsoluteFile());
@@ -28,9 +30,9 @@ public class funcionar {
 	            System.out.println("Erro ao executar SOM!");
 	            ex.printStackTrace();
 	        }*/
-			repository.open(login);
+			repository.open(usuario);
 			try {
-				repository.colocarFiltro();
+				repository.colocarFiltro(usuario.getEtiqueta());
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -41,7 +43,7 @@ public class funcionar {
 			boolean validacao;
 		    ativo.setAtivo(false);
 			try {
-				while("Sem registros para exibir" != repository.entrarNoProcessoAutomatico()) {
+				while("Sem registros para exibir" != repository.entrarNoProcessoAutomatico(usuario.getEtiqueta())) {
 					validacao = repository.dataDeValidacaoDosPrev();
 					if ( validacao == true) {
 						ativo = repository.verificacaoDeAtivo();
@@ -75,10 +77,12 @@ public class funcionar {
 			 return finalizacao;
 			
 		}
-    public InfomacoesDosPrev[] samir(LoginModelo  login) {
-    	repository.open(login);
+    public InfomacoesDosPrev[] samir(Usuario  usuario) {
+    	System.out.println("etiqueta do funcionar: " + usuario.getEtiqueta());
+    	repository.open(usuario);
+    	DAOInformacoesDosPrev salvarInfo = new DAOInformacoesDosPrev();
     	try {
-    		repository.colocarFiltro();
+    		repository.colocarFiltro(usuario.getEtiqueta());
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -90,12 +94,12 @@ public class funcionar {
 		boolean validacao;
 		String letra = "";
 		try {
-			while("Sem registros para exibir" != repository.entrarNoProcessoAutomatico()) {
+			while("Sem registros para exibir" != repository.entrarNoProcessoAutomatico(usuario.getEtiqueta())) {
 				validacao = repository.dataDeValidacaoDosPrev();
 				if ( validacao == true) {
 					ativo = repository.verificacaoDeAtivo();
 					if(ativo.getAtivo() == true) {
-						 repository.procurarDosPrev();
+						salvarInfo.salvarInformacoesDosPrev(repository.procurarDosPrev());
 						repository.etiquetar(validacao, letra, 0);
 						x++;
 					}

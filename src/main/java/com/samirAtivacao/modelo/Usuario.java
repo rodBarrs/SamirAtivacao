@@ -8,7 +8,7 @@ import javax.persistence.Id;
 
 
 @Entity
-public class UsuarioModelo {
+public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class UsuarioModelo {
 
 	private String cpf;
 
-
+	private String etiqueta;
 
 	public Long getId() {
 		return id;
@@ -53,6 +53,14 @@ public class UsuarioModelo {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public String getEtiqueta() {
+		return etiqueta;
+	}
+
+	public void setEtiqueta(String etiqueta) {
+		this.etiqueta = etiqueta;
 	}
 
 
