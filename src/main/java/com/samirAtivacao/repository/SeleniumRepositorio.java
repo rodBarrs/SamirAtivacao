@@ -199,7 +199,12 @@ public class SeleniumRepositorio {
 			// Providência Jurídica é o título da movimentação
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tr[" + i + "]/td[2]/div/span")));
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[" + i + "]/td[2]/div/span")));
-			Thread.sleep(500);
+			if(i > listaMovimentacao.size() - 3) {
+				Thread.sleep(500);
+			}
+			/*if(i < listaMovimentacao.size() - 2) {
+				this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.MILLISECONDS).pageLoadTimeout(1, TimeUnit.MILLISECONDS);
+			}*/
 
 			Boolean existeDosPrev = driver.findElement(By.xpath("//tr[" + i + "]/td[2]/div/span")).getText()
 					.toUpperCase().contains("DOSSIÊ PREVIDENCIÁRIO");
@@ -245,7 +250,7 @@ public class SeleniumRepositorio {
 						System.out.println("mesmo ano");
 						int x = 0;
 						x = dataATUALocalDateTime.getDayOfYear() - dataValidacao.getDayOfYear();
-						if (x <= 30) {
+						if (x <= 300) {
 							System.out.println("x é menor ou igual a 30  x = " + x);
 							return true;
 						} else {
@@ -259,7 +264,8 @@ public class SeleniumRepositorio {
 							if (dataValidacao.getMonthValue() == 12) {
 
 								int x = dataValidacao.getDayOfYear() - 333;
-								if (dataATUALocalDateTime.getDayOfYear()<= x ) {
+								//dataATUALocalDateTime.getDayOfYear()<= x
+								if (dataATUALocalDateTime.getDayOfYear()!= x ) {
 									System.out.println("x é menor ou igual a 30" + x);
 									return true;
 								} else {
@@ -305,10 +311,9 @@ public class SeleniumRepositorio {
 			if (existeDosPrev == true) {
 				WebElement dosClick = driver.findElement(By.xpath("//tr[" + i + "]/td[2]/div/span"));
 				dosClick.click();
-
 				driver.switchTo().frame(0);
 				try {
-					String cnj = driver.findElement(By.xpath("/html/body/div/div[1]/table/tbody/tr[1]/td")).getText();
+					String cnj = driver.findElement(By.xpath("//html/body/div/div[1]/table/tbody/tr[1]/td")).getText();
 					System.out.println("CNJ: " + cnj);
 					String dataAjuizamento = driver.findElement(By.xpath("/html/body/div/div[1]/table/tbody/tr[2]/td"))
 							.getText();
@@ -457,7 +462,7 @@ public class SeleniumRepositorio {
 	}
 
 	public Ativo verificacaoDeAtivo() {
-		this.driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS).pageLoadTimeout(1, TimeUnit.SECONDS);
+		this.driver.manage().timeouts().implicitlyWait(100, TimeUnit.MILLISECONDS).pageLoadTimeout(100, TimeUnit.MILLISECONDS);
 		List<String> janela = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(janela.get(1));
 		Ativo ativo = new Ativo();
@@ -489,10 +494,25 @@ public class SeleniumRepositorio {
 		driver.quit();
 	}
 
-	public void teste(InfomacoesDosPrev[] lista) {
-		String listaString = Arrays.toString(lista);
-		driver.get("https://www.google.com.br/");
-		driver.findElement(By.xpath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input"))
-				.sendKeys(listaString);
+	public void teste(InfomacoesDosPrev lista) {
+		//String listaString = Arrays.toString(lista);
+		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS).pageLoadTimeout(30, TimeUnit.SECONDS);
+		driver.get("http://localhost:8080/");
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div/form/button")).click();
+		//driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[1]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getNumeroDoProcesso());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getNome());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[1]/div[3]/div/div/div[1]/div/input")).click();
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[1]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDataAjuizamento());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[2]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getCpf());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div/input")).click();
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getDibInicial());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div/input")).click();
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDibFinal());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[2]/div[4]/div/div/div[1]/div/input")).sendKeys(lista.getRmi());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[3]/div[1]/div/div/div[1]/div/input")).sendKeys(lista.getBeneficio());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[3]/div[2]/div/div/div[1]/div/input")).sendKeys(lista.getNb());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[3]/div[3]/div/div/div[1]/div/input")).click();
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[3]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getDip());
+		driver.findElement(By.xpath("/html/body/div/div/main/div/div/span/div[2]/div/div/div[2]/div[3]/div[3]/div/div/div[1]/div/input")).sendKeys(lista.getAps());
 	}
 }

@@ -31,8 +31,8 @@ public class DAOInformacoesDosPrev extends ConexaoSQLite {
 			preparedStatement.setString(4, informacoes.getCpf());
 			preparedStatement.setString(5, informacoes.getDibInicial());
 			preparedStatement.setString(6, informacoes.getDibFinal());
-			preparedStatement.setString(7, informacoes.getBeneficio());
-			preparedStatement.setString(8, informacoes.getRmi());
+			preparedStatement.setString(7, informacoes.getRmi());
+			preparedStatement.setString(8, informacoes.getBeneficio());
 			preparedStatement.setString(9, informacoes.getNb());
 			preparedStatement.setString(10, informacoes.getAps());
 			preparedStatement.setString(11, informacoes.getDip());

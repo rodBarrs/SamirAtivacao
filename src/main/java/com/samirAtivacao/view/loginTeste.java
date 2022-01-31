@@ -233,7 +233,7 @@ public class loginTeste extends javax.swing.JFrame {
         usuario.setCpf(jTextField1.getText());
         usuario.setNome(jTextField2.getText());
         usuario.setSenha(jPasswordField1.getText());
-        usuario.setEtiqueta(jTextField3.getText());
+        usuario.setEtiqueta(jTextField3.getText().toUpperCase());
         funcionar shazam = new funcionar();
         JOptionPane.showMessageDialog(null,  shazam.samir(usuario));
     }//GEN-LAST:event_jToggleButton1ActionPerformed
@@ -248,23 +248,23 @@ public class loginTeste extends javax.swing.JFrame {
         usuario.setCpf(jTextField1.getText());
         usuario.setNome(jTextField2.getText());
         usuario.setSenha(jPasswordField1.getText());
-        usuario.setEtiqueta(jTextField3.getText());
+        usuario.setEtiqueta(jTextField3.getText().toUpperCase());
         System.out.println("etiqueta usuario: " + usuario.getEtiqueta());
         funcionar shazam = new funcionar();
         JOptionPane.showMessageDialog(null,  shazam.testeDeAtivacao(usuario));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField2ActionPerformed
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        ControllerUsuario shazam = new ControllerUsuario();
        Usuario usuario = new Usuario();
        usuario.setCpf(jTextField1.getText());
        usuario.setNome(jTextField2.getText());
        usuario.setSenha(jPasswordField1.getText());
-       usuario.setEtiqueta(jTextField3.getText());
+       usuario.setEtiqueta(jTextField3.getText().toUpperCase());
        shazam.excluirUsuarioController();
         JOptionPane.showMessageDialog(null, shazam.salvarUsuarioController(usuario) );
     }//GEN-LAST:event_jButton2ActionPerformed

@@ -79,6 +79,7 @@ public class funcionar {
 		}
     public InfomacoesDosPrev[] samir(Usuario  usuario) {
     	System.out.println("etiqueta do funcionar: " + usuario.getEtiqueta());
+    	InfomacoesDosPrev info = new InfomacoesDosPrev();
     	repository.open(usuario);
     	DAOInformacoesDosPrev salvarInfo = new DAOInformacoesDosPrev();
     	try {
@@ -99,7 +100,9 @@ public class funcionar {
 				if ( validacao == true) {
 					ativo = repository.verificacaoDeAtivo();
 					if(ativo.getAtivo() == true) {
-						salvarInfo.salvarInformacoesDosPrev(repository.procurarDosPrev());
+						info = repository.procurarDosPrev();
+						salvarInfo.salvarInformacoesDosPrev(info);
+						lista[x] = info;
 						repository.etiquetar(validacao, letra, 0);
 						x++;
 					}
@@ -116,6 +119,7 @@ public class funcionar {
 		} catch (Exception e) {
 			System.out.println("entrei no cath");
 		}
+		repository.teste(info);
 		 return lista;
 		
 		
