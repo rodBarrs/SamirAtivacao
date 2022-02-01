@@ -1,5 +1,7 @@
 package com.samirAtivacao.samirAtivacao;
 
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 import org.springframework.boot.SpringApplication;
@@ -155,7 +157,12 @@ public class SamirAtivacaoApplication extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new loginTeste().setVisible(true);
+                try {
+					new loginTeste().setVisible(true);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
     }
