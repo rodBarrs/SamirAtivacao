@@ -7,7 +7,6 @@ package com.samirAtivacao.controller;
 import com.samirAtivacao.DAO.DAOInformacoesDosPrev;
 import com.samirAtivacao.modelo.Ativo;
 import com.samirAtivacao.modelo.InfomacoesDosPrev;
-import com.samirAtivacao.modelo.LoginModelo;
 import com.samirAtivacao.modelo.Usuario;
 import com.samirAtivacao.repository.SeleniumRepositorio;
 

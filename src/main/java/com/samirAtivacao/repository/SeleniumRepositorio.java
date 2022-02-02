@@ -7,7 +7,6 @@ package com.samirAtivacao.repository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -250,7 +249,7 @@ public class SeleniumRepositorio {
 						System.out.println("mesmo ano");
 						int x = 0;
 						x = dataATUALocalDateTime.getDayOfYear() - dataValidacao.getDayOfYear();
-						if (x <= 300) {
+						if (x <= 30) {
 							System.out.println("x é menor ou igual a 30  x = " + x);
 							return true;
 						} else {
@@ -265,7 +264,7 @@ public class SeleniumRepositorio {
 
 								int x = dataValidacao.getDayOfYear() - 333;
 								//dataATUALocalDateTime.getDayOfYear()<= x
-								if (dataATUALocalDateTime.getDayOfYear()!= x ) {
+								if (dataATUALocalDateTime.getDayOfYear()<= x ) {
 									System.out.println("x é menor ou igual a 30" + x);
 									return true;
 								} else {
