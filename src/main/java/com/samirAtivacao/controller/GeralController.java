@@ -4,6 +4,8 @@
  */
 package com.samirAtivacao.controller;
 
+import java.util.List;
+
 import com.samirAtivacao.DAO.DAOInformacoesDosPrev;
 import com.samirAtivacao.modelo.Ativo;
 import com.samirAtivacao.modelo.InfomacoesDosPrev;
@@ -14,10 +16,10 @@ import com.samirAtivacao.repository.SeleniumRepositorio;
  *
  * @author AGU
  */
-public class funcionar {
+public class GeralController {
     private SeleniumRepositorio repository = new SeleniumRepositorio();
     
-    public String testeDeAtivacao( Usuario usuario) {
+    public String beremiz( Usuario usuario) {
 			/*try {
 	            //URL do som que no caso esta no pendrive, mais ainda é uma fase de teste.
 	            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("espartanos.wav").getAbsoluteFile());
@@ -76,11 +78,11 @@ public class funcionar {
 			 return finalizacao;
 			
 		}
-    public InfomacoesDosPrev[] samir(Usuario  usuario) {
+    public String samir(Usuario  usuario) {
     	System.out.println("etiqueta do funcionar: " + usuario.getEtiqueta());
     	InfomacoesDosPrev info = new InfomacoesDosPrev();
     	repository.open(usuario);
-    	DAOInformacoesDosPrev salvarInfo = new DAOInformacoesDosPrev();
+    	DAOInformacoesDosPrev daoInfo = new DAOInformacoesDosPrev();
     	try {
     		repository.colocarFiltro(usuario.getEtiqueta());
 			
@@ -89,21 +91,26 @@ public class funcionar {
 		}
     	Ativo ativo = new Ativo();
     	ativo.setAtivo(false);
-		InfomacoesDosPrev[] lista = new InfomacoesDosPrev[100];
 		int x = 0;
 		boolean validacao;
 		String letra = "";
+		daoInfo.excluirUInfomacoesDosPrev();
 		try {
 			while("Sem registros para exibir" != repository.entrarNoProcessoAutomatico(usuario.getEtiqueta())) {
 				validacao = repository.dataDeValidacaoDosPrev();
 				if ( validacao == true) {
 					ativo = repository.verificacaoDeAtivo();
 					if(ativo.getAtivo() == true) {
-						info = repository.procurarDosPrev();
-						salvarInfo.salvarInformacoesDosPrev(info);
-						lista[x] = info;
-						repository.etiquetar(validacao, letra, 0);
-						x++;
+						if(x <= 10) {
+							info = repository.procurarDosPrev();
+							daoInfo.salvarInformacoesDosPrev(info);
+							repository.etiquetar(validacao, letra, 0);
+							x++;
+						}
+						else {
+							break;
+						}
+						
 					}
 					else {
 						repository.etiquetar(ativo.getAtivo(), ativo.getBeneficio(), 1);
@@ -118,9 +125,32 @@ public class funcionar {
 		} catch (Exception e) {
 			System.out.println("entrei no cath");
 		}
-		repository.teste(info);
-		 return lista;
+		BancoController banco = new BancoController();
+		List<InfomacoesDosPrev> aLista = banco.litaDosPrev();
+		System.out.println("Cpf: " + aLista.get(1).getCpf());
+		//repository.teste(info);
+		 return "deu certo";
 		
 		
 	}
+    public String InserirNoFront(Usuario usuario, Boolean driever) {
+    	//repository.open(usuario);
+    	if(driever == true){
+    		repository.openFront(usuario);
+    	}
+    	else {
+    		repository.openSamirFront(usuario);
+    	}
+    	
+    	BancoController banco = new BancoController();
+		List<InfomacoesDosPrev> lista = banco.litaDosPrev();
+		System.out.println("Cpf: " + lista.get(1).getCpf());
+		int x = 0;
+		while(x <lista.size()) {
+			repository.inserirDosPrev(lista.get(x));
+			x++;
+		}
+		
+		return lista.get(0).getCpf();
+    }
 }

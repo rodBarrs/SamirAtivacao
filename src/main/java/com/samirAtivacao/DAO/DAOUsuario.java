@@ -36,7 +36,7 @@ public class DAOUsuario extends ConexaoSQLite {
 		conectar();
 		PreparedStatement preparedStatment;
 		String sql = "DELETE FROM usuario";
-		preparedStatment = this.criarPreparedStatement(sql);
+		preparedStatment = this.criarPreparedStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		try {
 			preparedStatment.executeUpdate();
 		} catch (SQLException e) {

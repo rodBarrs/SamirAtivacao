@@ -83,13 +83,13 @@ public class Selecao extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    loginTeste loginSamir;
-    beremiz loginbremiz;
+    Samir loginSamir;
+    Beremiz loginbremiz;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
        
             if(loginSamir == null){
-			loginSamir = new loginTeste();
+			loginSamir = new Samir();
 			loginSamir.setLocationRelativeTo(null);
 			loginSamir.setVisible(true);
 			loginSamir.setResizable(false);
@@ -105,7 +105,7 @@ public class Selecao extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if(loginbremiz == null){
-		loginbremiz = new beremiz();
+		loginbremiz = new Beremiz();
 		loginbremiz.setLocationRelativeTo(null);
 		loginbremiz.setVisible(true);
             loginbremiz.setResizable(false);

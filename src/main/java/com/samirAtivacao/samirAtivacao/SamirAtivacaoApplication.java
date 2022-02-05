@@ -5,9 +5,9 @@ import javax.swing.JOptionPane;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.samirAtivacao.controller.funcionar;
+import com.samirAtivacao.controller.GeralController;
 import com.samirAtivacao.modelo.Usuario;
-import com.samirAtivacao.view.loginTeste;
+import com.samirAtivacao.view.Samir;
 
 
 
@@ -119,8 +119,8 @@ public class SamirAtivacaoApplication extends javax.swing.JFrame {
         login.setSenha(jPasswordField1.getText());
         login.setCpf(jTextField1.getText());
         
-        funcionar shazam = new funcionar();
-        JOptionPane.showMessageDialog(null,  shazam.testeDeAtivacao(login));
+        GeralController shazam = new GeralController();
+        JOptionPane.showMessageDialog(null,  shazam.beremiz(login));
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
@@ -141,20 +141,20 @@ public class SamirAtivacaoApplication extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(loginTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Samir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(loginTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Samir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(loginTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Samir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(loginTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Samir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new loginTeste().setVisible(true);
+                new Samir().setVisible(true);
             }
         });
     }
