@@ -18,6 +18,7 @@ import com.samirAtivacao.repository.SeleniumRepositorio;
  */
 public class GeralController {
     private SeleniumRepositorio repository = new SeleniumRepositorio();
+    private Thread backgroundThread;
     
     public String beremiz( Usuario usuario) {
 			/*try {
@@ -81,8 +82,11 @@ public class GeralController {
     public String samir(Usuario  usuario) {
     	System.out.println("etiqueta do funcionar: " + usuario.getEtiqueta());
     	InfomacoesDosPrev info = new InfomacoesDosPrev();
-    	repository.open(usuario);
+    	
     	DAOInformacoesDosPrev daoInfo = new DAOInformacoesDosPrev();
+    	
+    	repository.open(usuario);
+    	
     	try {
     		repository.colocarFiltro(usuario.getEtiqueta());
 			
@@ -127,7 +131,7 @@ public class GeralController {
 		}
 		BancoController banco = new BancoController();
 		List<InfomacoesDosPrev> aLista = banco.litaDosPrev();
-		System.out.println("Cpf: " + aLista.get(1).getCpf());
+		
 		//repository.teste(info);
 		 return "deu certo";
 		
@@ -139,18 +143,37 @@ public class GeralController {
     		repository.openFront(usuario);
     	}
     	else {
-    		repository.openSamirFront(usuario);
+    		
+    		Runnable task = new Runnable() {
+    			@Override
+    			public void run() {
+    				repository.openSamirFront(usuario);
+    			}
+        	};
     	}
     	
     	BancoController banco = new BancoController();
 		List<InfomacoesDosPrev> lista = banco.litaDosPrev();
-		System.out.println("Cpf: " + lista.get(1).getCpf());
+		
 		int x = 0;
 		while(x <lista.size()) {
 			repository.inserirDosPrev(lista.get(x));
 			x++;
 		}
 		
-		return lista.get(0).getCpf();
+		return "Entrei";
+    }
+    
+  
+	public String pararTriagem () {
+    	try {
+
+			repository.quit();
+
+			
+
+		} catch (Exception e) {
+		}
+    	return "Parou";
     }
 }
